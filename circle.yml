@@ -1,0 +1,59 @@
+## Test machine setup
+machine:
+  timezone:
+    Asia/Jakarta #Set the machine timezone
+
+  php:
+    version: 5.6.14
+
+# Add some environment variables
+  environment:
+    WP_CORE_DIR: /home/ubuntu/aguspri/wp
+    THEME_NAME: aguspri
+
+#Customize dependencies
+dependencies:
+  pre:
+
+  # Use cURL to fetch WP-CLI
+    - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+
+  # Make sure WP-CLI is executable
+    - chmod +x wp-cli.phar
+
+  # Remove wp dir
+    - rm -rf wp
+
+  # Clone wp core
+    - git clone git://core.git.wordpress.org/ wp
+
+  # create database
+    - mysql -u ubuntu -e "create database wptest"
+
+  # add wp config
+    - ./wp-cli.phar core config --allow-root --dbname=wptest --dbuser=ubuntu --dbhost=localhost --path=$WP_CORE_DIR
+
+  # Install wp
+    - ./wp-cli.phar core install --allow-root --admin_name=admino --admin_password=passwordd --admin_email=asheu321@gmail.com --url=http://aguspri.dev --title=AgusPri --path=$WP_CORE_DIR
+
+  # download aguspri theme
+    - git clone https://github.com/asheu321/$THEME_NAME.git
+
+  # Copy theme to themes directory
+    - yes | cp -rf $THEME_NAME wp/wp-content/themes
+
+
+## test override
+test:
+  override:
+    # This is just for us to see that the WP theme was actually installed and is active
+      - ./wp-cli.phar theme list --path=$WP_CORE_DIR
+
+    # activate aguspri theme
+      - ./wp-cli.phar theme activate $THEME_NAME --path=$WP_CORE_DIR
+
+#deployment:
+#  production:
+#    branch: master
+#    commands:
+#      - rsync -avze ssh /home/ubuntu/$PLUGIN_NAME/$PLUGIN_NAME $SSHUSERNAME@$SSHIP:$SERVERPATH
