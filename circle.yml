@@ -4,7 +4,7 @@ machine:
     Asia/Jakarta #Set the machine timezone
 
   php:
-    version: 7.0.4
+    version: 7.1.9
 
 # Add some environment variables
   environment:
