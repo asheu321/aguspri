@@ -58,8 +58,8 @@ test:
     # activate aguspri theme
       - ./wp-cli.phar theme activate $THEME_NAME --path=$WP_CORE_DIR
 
-#deployment:
-#  production:
-#    branch: master
-#    commands:
-#      - rsync -avze ssh /home/ubuntu/$PLUGIN_NAME/$PLUGIN_NAME $SSHUSERNAME@$SSHIP:$SERVERPATH
+deployment:
+  production:
+    branch: master
+    commands:
+      - rsync -avze ssh /home/ubuntu/aguspri/$THEME_NAME $SSHUSERNAME@$SSHIP:$SERVERPATH
