@@ -20,9 +20,11 @@ dependencies:
 
   # Make sure WP-CLI is executable
     - chmod +x wp-cli.phar
+    - ls
 
   # Remove wp dir
     - rm -rf wp
+    - ls
 
   # Clone wp core
     - git clone git://core.git.wordpress.org/ wp
