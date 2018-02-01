@@ -29,9 +29,12 @@ dependencies:
 
   # create database
     - mysql -u ubuntu -e "create database wptest"
+    
+  # check if database created
+    - mysql -u ubuntu -e "show databases"
 
   # add wp config
-    - ./wp-cli.phar core config --allow-root --dbname=wptest --dbuser=ubuntu --dbhost=localhost --path=$WP_CORE_DIR
+    - ./wp-cli.phar core config --allow-root --dbname=wptest --dbuser=ubuntu --dbhost=127.0.0.1 --path=$WP_CORE_DIR
 
   # Install wp
     - ./wp-cli.phar core install --allow-root --admin_name=admino --admin_password=passwordd --admin_email=asheu321@gmail.com --url=http://aguspri.dev --title=AgusPri --path=$WP_CORE_DIR
