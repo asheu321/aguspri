@@ -14,20 +14,23 @@ machine:
 #Customize dependencies
 dependencies:
   pre:
-
+  
+  # Move all theme files to a folder
+    - mv ~/* aguspri/
+    - ls
+    
   # Use cURL to fetch WP-CLI
     - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
   # Make sure WP-CLI is executable
     - chmod +x wp-cli.phar
     - ls
+    
+  # Create wp directory
+    - mkdir wp
 
-  # Remove wp dir
-    - rm -rf wp
-    - ls
-
-  # Clone wp core
-    - git clone git://core.git.wordpress.org/ wp
+  # Download wp
+    - ./wp-cli.phar core download --path=$WP_CORE_DIR
 
   # create database
     - mysql -u ubuntu -e "create database wptest"
@@ -35,14 +38,11 @@ dependencies:
   # check if database created
     - mysql -u ubuntu -e "show databases"
 
-  # add wp config
+  # add new wp config
     - ./wp-cli.phar core config --allow-root --dbname=wptest --dbuser=ubuntu --dbhost=127.0.0.1 --path=$WP_CORE_DIR
 
   # Install wp
     - ./wp-cli.phar core install --allow-root --admin_name=admino --admin_password=passwordd --admin_email=asheu321@gmail.com --url=http://aguspri.dev --title=AgusPri --path=$WP_CORE_DIR
-
-  # download aguspri theme
-    - git clone https://github.com/asheu321/$THEME_NAME.git
 
   # Copy theme to themes directory
     - yes | cp -rf $THEME_NAME wp/wp-content/themes
