@@ -21,7 +21,7 @@ require get_template_directory() . '/inc/agp_customizer.php';
 /**
  * Libraries
  */
-require get_template_directory() . '/inc/lib/minify/Minify.php';
+#require get_template_directory() . '/inc/lib/minify/Minify.php';
 
 /**
  * Load Jetpack compatibility file.
