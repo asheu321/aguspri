@@ -62,4 +62,4 @@ deployment:
   production:
     branch: master
     commands:
-      - rsync -avze ssh /home/ubuntu/aguspri/$THEME_NAME $SSHUSERNAME@$SSHIP:~/aguspri.com/wp-content/themes/aguspri
+      - rsync -avze ssh /home/ubuntu/aguspri/$THEME_NAME $SSHUSERNAME@$SSHIP:~/aguspri.com/wp-content/themes/
