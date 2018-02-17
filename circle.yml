@@ -10,14 +10,15 @@ machine:
   environment:
     WP_CORE_DIR: /home/ubuntu/aguspri/wp
     THEME_NAME: aguspri
-    #TOTAL_FILES: eval "find /home/ubuntu/aguspri/ -type f | wc -l"
+    TOTAL_FILES: eval $(find /home/ubuntu/aguspri/ -type f | wc -l)
 
 #Customize dependencies
 dependencies:
   pre:
   
   # Move all theme files to a folder
-    - echo $DISPLAY
+    - $TOTAL_FILES
+    - echo $TOTAL_FILES
     - mkdir aguspri
     - mv !(aguspri) aguspri
     - ls
