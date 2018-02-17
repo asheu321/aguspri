@@ -65,4 +65,5 @@ deployment:
     branch: master
     commands:
       - echo $TOTAL_FILES
-      - rsync -avze ssh /home/ubuntu/aguspri/$THEME_NAME $SSHUSERNAME@$SSHIP:~/aguspri.com/wp-content/themes/
+      - rsync -vrltD --stats --human-readable /home/ubuntu/aguspri/$THEME_NAME $SSHUSERNAME@$SSHIP:~/aguspri.com/wp-content/themes/ | pv -lep -s $TOTAL_FILES
+      #- rsync -avze ssh /home/ubuntu/aguspri/$THEME_NAME $SSHUSERNAME@$SSHIP:~/aguspri.com/wp-content/themes/
