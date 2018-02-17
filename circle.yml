@@ -10,12 +10,14 @@ machine:
   environment:
     WP_CORE_DIR: /home/ubuntu/aguspri/wp
     THEME_NAME: aguspri
+    TOTAL_FILES: $(find /home/ubuntu/aguspri/ -type f | wc -l)
 
 #Customize dependencies
 dependencies:
   pre:
   
   # Move all theme files to a folder
+    - echo $TOTAL_FILES
     - mkdir aguspri
     - mv !(aguspri) aguspri
     - ls
@@ -47,6 +49,8 @@ dependencies:
 
   # Copy theme to themes directory
     - yes | cp -rf $THEME_NAME wp/wp-content/themes
+    
+    - echo $TOTAL_FILES
 
 
 ## test override
@@ -62,4 +66,5 @@ deployment:
   production:
     branch: master
     commands:
+      - echo $TOTAL_FILES
       - rsync -avze ssh /home/ubuntu/aguspri/$THEME_NAME $SSHUSERNAME@$SSHIP:~/aguspri.com/wp-content/themes/
