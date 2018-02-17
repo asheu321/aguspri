@@ -17,7 +17,6 @@ dependencies:
   pre:
   
   # Move all theme files to a folder
-    - $TOTAL_FILES
     - echo $TOTAL_FILES
     - mkdir aguspri
     - mv !(aguspri) aguspri
