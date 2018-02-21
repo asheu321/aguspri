@@ -20,3 +20,13 @@
 	clear: both;
 	margin: 0 0 1.5em;
 }
+
+.site {
+	@include breakpoint($max: 1280px) {
+    	max-width: 1024px;
+    }
+    
+    max-width: 1280px;
+    margin: 0 auto;
+
+}

@@ -6,7 +6,7 @@ function aguspri_scripts() {
 	
 	wp_enqueue_style( 'aguspri-style', get_stylesheet_uri() );
 
-	wp_enqueue_style( 'header', get_template_directory_uri() . '/layouts/header.css', array(), false, 'all' );
+	//wp_enqueue_style( 'header', get_template_directory_uri() . '/layouts/header.css', array(), false, 'all' );
 
 	wp_enqueue_script( 'aguspri-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
